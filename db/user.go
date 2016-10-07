@@ -8,8 +8,8 @@ import (
 
 type User struct {
 	gorm.Model
-	Email            string    `gorm:"unique_index"`
-	EmailConfirmedAt time.Time `gorm:"null"`
+	Email            string     `gorm:"unique_index"`
+	EmailConfirmedAt *time.Time `gorm:"null"`
 	Password         string
 	Name             string
 	Username         string

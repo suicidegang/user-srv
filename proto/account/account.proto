@@ -2,10 +2,11 @@ syntax = "proto3";
 
 service Account {
 	rpc Create(CreateRequest) returns (CreateResponse) {}
-	// rpc Read(ReadRequest) returns (ReadResponse) {}
+	rpc Read(ReadRequest) returns (ReadResponse) {}
+	rpc Search(SearchRequest) returns (SearchResponse) {}
+	
 	// rpc Update(UpdateRequest) returns (UpdateResponse) {}
 	// rpc Delete(DeleteRequest) returns (DeleteResponse) {}
-	// rpc Search(SearchRequest) returns (SearchResponse) {}
 	// rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse) {}
 	// rpc Login(LoginRequest) returns (LoginResponse) {}
 	// rpc Logout(LogoutRequest) returns (LogoutResponse) {}
@@ -13,8 +14,8 @@ service Account {
 }
 
 message User {
-	int64 id = 1;		// uuid
-	string username = 2;	// alphanumeric user or org
+	uint64 id = 1;		
+	string username = 2;
 	string email = 3;
 	string created = 4;
 	string updated = 5;
@@ -26,4 +27,23 @@ message CreateRequest {
 }
 
 message CreateResponse {
+}
+
+message ReadRequest {
+	uint64 id = 1;
+}
+
+message ReadResponse {
+	User user = 1;
+}
+
+message SearchRequest {
+	string query = 1; // Email, username, names...
+	repeated uint64 id = 2;
+	uint32 limit = 3;
+	uint32 offset = 4;
+}
+
+message SearchResponse {
+	repeated User users = 1;
 }
